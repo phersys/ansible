@@ -1,0 +1,14 @@
+for a in $(cat nptuat.txt); do ssh-copy-id -i /home/phersys/.ssh/id_rsa.pub ansible@$a ; done;
+for a in $(cat dpaprod.txt);do ssh root@$a 'sudo yum -y install gcc openssl-devel bzip2-devel' ; done;
+for a in $(cat dpaprod.txt);do scp Python-2.7.16.tgz root@$a:. ; done;
+for a in $(cat dpaprod.txt);do ssh root@$a 'sudo tar xzf Python-2.7.16.tgz ' ; done;
+for a in $(cat dpaprod.txt);do ssh root@$a 'sudo mv Python-2.7.16 /usr/src/.' ; done;
+for a in $(cat dpaprod.txt);do ssh root@$a 'sudo /usr/src/Python-2.7.16/configure --enable-optimizations;sudo make altinstall ' ; done;
+
+
+ssh-copy-id -i /home/phersys/.ssh/id_rsa.pub root@10.97.149.158
+ssh root@10.97.149.158 'sudo yum -y install gcc openssl-devel bzip2-devel'
+scp Python-2.7.16.tgz root@10.97.149.158:.
+ssh root@10.97.149.158 'sudo tar xzf Python-2.7.16.tgz'
+ssh root@10.97.149.158 'sudo mv Python-2.7.16 /usr/src/.'
+ssh root@10.97.149.158 'sudo /usr/src/Python-2.7.16/configure --enable-optimizations;sudo make altinstall '
